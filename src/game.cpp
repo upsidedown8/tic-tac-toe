@@ -53,7 +53,10 @@ bool tic_tac_toe::game::is_over() {
 
 bool tic_tac_toe::game::make_move(size_t row, size_t col) {
     int_fast32_t pos = 1 << row * 3 + col;
-    if (!is_player_move() || is_over() || m_board.is_occupied(pos))
+    if (!is_player_move() || is_over() ||
+        m_board.is_occupied(pos) ||
+        row < 0 || row > 2 ||
+        col < 0 || col > 2)
         return false;
     m_board.set(pos, USERPLAYER);
     m_player_move = false;
