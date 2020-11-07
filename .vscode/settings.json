@@ -12,5 +12,4 @@
         "memory": "cpp",
         "iostream": "cpp"
     },
-    "C_Cpp.default.configurationProvider": "numaru.vscode-cmake-lite"
 }

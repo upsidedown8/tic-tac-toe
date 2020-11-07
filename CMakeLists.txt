@@ -5,10 +5,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
 
 include_directories(
     src/
@@ -30,7 +26,7 @@ target_link_libraries(
 )
 
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 REQUIRED Core Widgets)
+set(SFML_USE_STATIC_STD_LIBS TRUE)
 
 add_executable(
     tic_tac_toe_gui
@@ -39,5 +35,9 @@ add_executable(
 target_link_libraries(
     tic_tac_toe_gui
     tic_tac_toe
-    Qt5::Widgets
+    sfml-system
+    sfml-window
+    sfml-graphics
+    sfml-network
+    sfml-audio
 )
