@@ -12,24 +12,32 @@ set(CMAKE_AUTOUIC ON)
 
 include_directories(
     src/
-    inc/
 )
 
-set(
-    SRC_FILES
+add_library(
+    tic_tac_toe
     src/board.cpp
     src/game.cpp
+)
+
+add_executable(
+    tic_tac_toe_console
+    src/console_game.cpp
+)
+target_link_libraries(
+    tic_tac_toe_console
+    tic_tac_toe
 )
 
 find_package(PkgConfig REQUIRED)
 find_package(Qt5 REQUIRED Core Widgets)
 
 add_executable(
-    tic_tac_toe_exec
-    ${SRC_FILES}
-    src/main.cpp
+    tic_tac_toe_gui
+    src/gui_game.cpp
 )
 target_link_libraries(
-    tic_tac_toe_exec
+    tic_tac_toe_gui
+    tic_tac_toe
     Qt5::Widgets
 )
