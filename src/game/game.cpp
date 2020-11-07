@@ -91,7 +91,3 @@ bool tic_tac_toe::game::computer_move() {
     m_move++;
     return true;
 }
-
-void tic_tac_toe::game::display() {
-    m_board.display();
-}

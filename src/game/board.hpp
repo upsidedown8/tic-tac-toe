@@ -30,12 +30,19 @@ class board {
 private:
     int_fast32_t m_state;
 
+    board(int_fast32_t state);
+
 public:
     board();
+
+    board *copy();
 
     void reset();
 
     bool is_occupied(const int_fast32_t square);
+    bool is_naught(const int_fast32_t square);
+    bool is_cross(const int_fast32_t square);
+
     void clear_square(const int_fast32_t square);
     void set(const int_fast32_t square, const size_t player);
 

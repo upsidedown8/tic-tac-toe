@@ -12,8 +12,8 @@ include_directories(
 
 add_library(
     tic_tac_toe
-    src/board.cpp
-    src/game.cpp
+    src/game/board.cpp
+    src/game/game.cpp
 )
 
 add_executable(
@@ -30,6 +30,7 @@ set(SFML_USE_STATIC_STD_LIBS TRUE)
 
 add_executable(
     tic_tac_toe_gui
+    src/gui/gui.cpp
     src/gui_game.cpp
 )
 target_link_libraries(

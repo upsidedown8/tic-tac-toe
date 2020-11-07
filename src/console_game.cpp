@@ -1,5 +1,5 @@
 #include <iostream>
-#include "game.hpp"
+#include "game/game.hpp"
 
 int main(int argc, char **argv) {
     tic_tac_toe::game game;
@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
     while (!game.is_over()) {
         // system("clear");
         if (game.is_player_move()) {
-            game.display();
+            game.m_board.display();
             while (game.is_player_move()) { 
                 std::cout << "enter row: ";
                 std::cin >> row;
@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
             game.computer_move();
         }
     }
-    game.display();
+    game.m_board.display();
 
     return 0;
 }

@@ -12,9 +12,16 @@ const int_fast32_t wins[] {
     0b001010100  // / diagonal
 };
 
+tic_tac_toe::board::board(int_fast32_t state) {
+    m_state = state;
+}
 
 tic_tac_toe::board::board() {
     reset();
+}
+
+tic_tac_toe::board *tic_tac_toe::board::copy() {
+    return new board(m_state);
 }
 
 void tic_tac_toe::board::reset() {
@@ -26,6 +33,15 @@ bool tic_tac_toe::board::is_occupied(const int_fast32_t square) {
         m_state & square ||
         m_state & (square << AIPLAYER);
 }
+bool tic_tac_toe::board::is_naught(const int_fast32_t square) {
+    return
+        is_occupied(square) &&
+        (m_state & (square << AIPLAYER));
+}
+bool tic_tac_toe::board::is_cross(const int_fast32_t square) {
+    return is_occupied(square) && !is_naught(square);
+}
+
 void tic_tac_toe::board::clear_square(const int_fast32_t square) {
     m_state &= ~(
         square |

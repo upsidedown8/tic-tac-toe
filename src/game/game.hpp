@@ -1,5 +1,5 @@
-#if !defined(TIC_TAC_TOE_GAME_HPP)
-#define TIC_TAC_TOE_GAME_HPP
+#if !defined(TIC_TAC_TOE_GAME_GAME_HPP)
+#define TIC_TAC_TOE_GAME_GAME_HPP
 
 #include "board.hpp"
 
@@ -12,7 +12,7 @@ private:
 
     int negamax(
         board *node,
-        int depth,
+        // int depth,
         int alpha,
         int beta,
         int color,
@@ -30,11 +30,9 @@ public:
 
     bool make_move(size_t row, size_t col);
     bool computer_move();
-
-    void display();
 };
 
 } // namespace tic_tac_toe
 
 
-#endif // TIC_TAC_TOE_GAME_HPP
+#endif // TIC_TAC_TOE_GAME_GAME_HPP
