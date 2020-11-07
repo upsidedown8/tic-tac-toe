@@ -7,6 +7,7 @@ namespace tic_tac_toe {
     
 class game {
 private:
+    int m_move;
     bool m_player_move;
 
     int negamax(

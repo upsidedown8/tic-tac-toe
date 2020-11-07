@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 #include <algorithm>
-#include <cstdio>
+#include <vector>
 
 int tic_tac_toe::game::negamax(
     board *node,
@@ -40,7 +40,8 @@ tic_tac_toe::game::game() {
 }
 
 void tic_tac_toe::game::reset() {
-    m_player_move = false;
+    m_player_move = true;
+    m_move = 0;
     m_board.reset();
 }
 
@@ -60,27 +61,34 @@ bool tic_tac_toe::game::make_move(size_t row, size_t col) {
         return false;
     m_board.set(pos, USERPLAYER);
     m_player_move = false;
+    m_move++;
     return true;
 }
 bool tic_tac_toe::game::computer_move() {
     if (is_player_move() || is_over())
         return false;
-    int_fast32_t pos = 1, best_pos = -1;
+    std::vector<int_fast32_t> moves;
+    int_fast32_t pos = 1;
     int8_t best_score = -2;
     for (size_t i = 0; i < 9; i++, pos <<= 1) {
         if (!m_board.is_occupied(pos)) {
             m_board.set(pos, AIPLAYER);
-            int8_t score = -negamax(&m_board, 8, -3, 3, -1, USERPLAYER);
+            int8_t score = -negamax(&m_board, 9 - m_move, -3, 3, -1, USERPLAYER);
             m_board.clear_square(pos);
 
-            if (score > best_score) {
+            if (score >= best_score) {
+                if (best_score > score)
+                    moves.clear();
+                moves.push_back(pos);
                 best_score = score;
-                best_pos = pos;
             }
         }
     }
-    m_board.set(best_pos, AIPLAYER);
+    if (!moves.size())
+        return false;
+    m_board.set(moves[rand() % moves.size()], AIPLAYER);
     m_player_move = true;
+    m_move++;
     return true;
 }
 
