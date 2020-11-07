@@ -17,8 +17,21 @@ set(
     src/game.cpp
 )
 
+find_package(PkgConfig REQUIRED)
+find_package(Qt5 REQUIRED Core Widgets)
+
 add_executable(
     tic_tac_toe_exec
     ${SRC_FILES}
     src/main.cpp
 )
+target_link_libraries(
+    tic_tac_toe_exec
+    Qt5::Widgets
+)
+
+# set(TARGET_NAME QtDemo)
+# set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# set(CMAKE_AUTOMOC ON)
+# set(CMAKE_AUTORCC ON)
+# set(CMAKE_AUTOUIC ON)
