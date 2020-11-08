@@ -47,6 +47,7 @@ public:
     void set(const int_fast32_t square, const size_t player);
 
     int8_t evaluate();
+    int8_t get_end_code();
 
     void display();
 };

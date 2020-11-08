@@ -9,8 +9,8 @@ namespace tic_tac_toe {
 class gui {
 private:
     game m_game;
-    sf::Texture m_cross, m_naught, m_board;
-    sf::Sprite m_cross_sprite, m_naught_sprite, m_board_sprite;
+    sf::Texture m_cross, m_naught, m_board, m_line;
+    sf::Sprite m_cross_sprite, m_naught_sprite, m_board_sprite, m_line_sprite;
     sf::RenderWindow m_window;
 
 public:

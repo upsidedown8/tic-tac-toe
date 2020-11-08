@@ -4,10 +4,12 @@ tic_tac_toe::gui::gui() {
     m_cross.loadFromFile("assets/cross.png");
     m_naught.loadFromFile("assets/naught.png");
     m_board.loadFromFile("assets/board.png");
+    m_line.loadFromFile("assets/line.png");
 
     m_cross_sprite.setTexture(m_cross);
     m_naught_sprite.setTexture(m_naught);
     m_board_sprite.setTexture(m_board);
+    m_line_sprite.setTexture(m_line);
 }
 
 void tic_tac_toe::gui::start() {
@@ -70,7 +72,46 @@ void tic_tac_toe::gui::start() {
         }
 
         if (m_game.is_over()) {
-
+            bool draw_sprite = true;
+            int angle = 0, row = 0, col = 0;
+            switch(m_game.m_board.get_end_code()) {
+                case 0: // first row
+                    angle = 90;
+                    break;
+                case 1: // second row
+                    angle = 90;
+                    row = 1;
+                    break;
+                case 2: // third row
+                    angle = 90;
+                    row = 2;
+                    break;
+                case 3: // first col
+                    break;
+                case 4: // second col
+                    col = 1;
+                    break;
+                case 5: // third col
+                    col = 2;
+                    break;
+                case 6: // \ diagonal
+                    angle = -45;
+                    break;
+                case 7: // / diagonal
+                    angle = 45;
+                    row = 2;
+                    col = 2;
+                    break;
+                default: // draw
+                    draw_sprite = false;
+                    break;
+            }
+            if (draw_sprite) {
+                // float width = window.getSize().x;
+                // float height = window.getSize().y;
+                // fix rotation and position
+                // window.draw(m_line_sprite);
+            }
         }
 
         window.display();

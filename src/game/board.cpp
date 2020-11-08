@@ -70,6 +70,20 @@ int8_t tic_tac_toe::board::evaluate() {
             
     return INDETERMINATE;
 }
+int8_t tic_tac_toe::board::get_end_code() {
+    int i = 0;
+    // player 1
+    for (int_fast32_t win : wins) {
+        if ((m_state & win)             == win ||
+            ((m_state>>AIPLAYER) & win) == win) {
+            return i;
+        }
+        i++;
+    }
+
+    // no need to draw a line
+    return -1;
+}
 
 void tic_tac_toe::board::display() {
     const char *players = " xo";
