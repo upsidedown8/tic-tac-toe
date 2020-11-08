@@ -13,7 +13,7 @@ const int_fast32_t wins[] {
 };
 
 tic_tac_toe::board::board(int_fast32_t state) {
-    m_state = state;
+    m_state = state & 0b111111111111111111;
 }
 
 tic_tac_toe::board::board() {
@@ -29,9 +29,10 @@ void tic_tac_toe::board::reset() {
 }
 
 bool tic_tac_toe::board::is_occupied(const int_fast32_t square) {
-    return
-        m_state & square ||
-        m_state & (square << AIPLAYER);
+    return !!(
+        (m_state & square) |
+        (m_state & (square << AIPLAYER))
+    );
 }
 bool tic_tac_toe::board::is_naught(const int_fast32_t square) {
     return
@@ -53,19 +54,19 @@ void tic_tac_toe::board::set(const int_fast32_t square, const size_t player) {
 }
 
 int8_t tic_tac_toe::board::evaluate() {
-    // check for draw
-    if(((m_state | (m_state>>AIPLAYER)) & FULLBOARD) == FULLBOARD)
-        return DRAW;
-    
     // player 1
-    for (int32_t win : wins)
+    for (int_fast32_t win : wins)
         if ((m_state & win) == win)
             return USERPLAYERWIN;
     
     // player 2
-    for (int32_t win : wins)
+    for (int_fast32_t win : wins)
         if (((m_state>>AIPLAYER) & win) == win)
             return AIPLAYERWIN;
+
+    // check for draw
+    if(((m_state | (m_state>>AIPLAYER)) & FULLBOARD) == FULLBOARD)
+        return DRAW;
             
     return INDETERMINATE;
 }

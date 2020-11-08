@@ -10,13 +10,8 @@ private:
     int m_move;
     bool m_player_move;
 
-    int negamax(
-        board *node,
-        // int depth,
-        int alpha,
-        int beta,
-        int color,
-        int player);
+    int negamax(board *node, int player);
+    int_fast32_t best_move(board *node, int player);
 
 public:
     game();
